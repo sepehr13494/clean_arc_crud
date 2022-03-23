@@ -48,3 +48,7 @@ Customer {
 ### Submit your result
 
 Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com
+
+### for generate test class
+
+flutter pub run build_runner watch

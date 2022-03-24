@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
-import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 
 import 'package:mockito/mockito.dart';
@@ -24,7 +23,7 @@ void main() {
     id: 1,
     firstname: "firstname",
     lastname: "lastname",
-    dateOfBirth: DateTime.now(),
+    dateOfBirth: DateTime.parse("2022-10-12"),
     phoneNumber: "09373555973",
     email: "test@gmail.com",
     bankAccountNumber: "12356421356541",
@@ -33,7 +32,7 @@ void main() {
     id: 1,
     firstname: "firstname",
     lastname: "lastname",
-    dateOfBirth: DateTime.now(),
+    dateOfBirth: DateTime.parse("2022-10-12"),
     phoneNumber: "09373555973",
     email: "test@gmail.com",
     bankAccountNumber: "12356421356541",

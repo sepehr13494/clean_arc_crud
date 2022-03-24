@@ -2,9 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mc_crud_test/core/usecases/usercase.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
-import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/get_users.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../repositories/user_repository_test.mocks.dart';

@@ -21,7 +21,7 @@ void main() {
     useCase = DeleteUser(mockUserRepository);
   });
 
-  Success tSuccess = MySuccess(message: 'success');
+  Success tSuccess = const MySuccess(message: 'success');
 
   final tUser = UserEntity(
     id: 1,

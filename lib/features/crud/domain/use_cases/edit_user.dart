@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:mc_crud_test/core/error_and_success/failures.dart';
 import 'package:mc_crud_test/core/usecases/usercase.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
@@ -15,6 +14,5 @@ class EditUser implements UseCase<UserEntity, Params>{
   Future<Either<Failure, UserEntity>?> call(Params params) async {
     return await repository.editUser(params.userEntity);
   }
-
 
 }

@@ -34,12 +34,11 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> createUser(
-          _i6.UserEntity? user) =>
+  _i4.Future<_i2.Either<_i5.Failure, int>> createUser(_i6.UserEntity? user) =>
       (super.noSuchMethod(Invocation.method(#createUser, [user]),
-          returnValue: Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
-              _FakeEither_0<_i5.Failure, _i6.UserEntity>())) as _i4
-          .Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
+              returnValue: Future<_i2.Either<_i5.Failure, int>>.value(
+                  _FakeEither_0<_i5.Failure, int>()))
+          as _i4.Future<_i2.Either<_i5.Failure, int>>);
   @override
   _i4.Future<_i2.Either<_i5.Failure, List<_i6.UserEntity>>> getUsers() =>
       (super.noSuchMethod(Invocation.method(#getUsers, []),
@@ -48,12 +47,12 @@ class MockUserRepository extends _i1.Mock implements _i3.UserRepository {
                       _FakeEither_0<_i5.Failure, List<_i6.UserEntity>>()))
           as _i4.Future<_i2.Either<_i5.Failure, List<_i6.UserEntity>>>);
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> editUser(
+  _i4.Future<_i2.Either<_i5.Failure, _i7.Success>> editUser(
           _i6.UserEntity? user) =>
       (super.noSuchMethod(Invocation.method(#editUser, [user]),
-          returnValue: Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
-              _FakeEither_0<_i5.Failure, _i6.UserEntity>())) as _i4
-          .Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
+              returnValue: Future<_i2.Either<_i5.Failure, _i7.Success>>.value(
+                  _FakeEither_0<_i5.Failure, _i7.Success>()))
+          as _i4.Future<_i2.Either<_i5.Failure, _i7.Success>>);
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i7.Success>> deleteUser(
           _i6.UserEntity? user) =>

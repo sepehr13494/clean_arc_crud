@@ -5,13 +5,15 @@ import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 
-class EditUser implements UseCase<UserEntity, Params>{
+import '../../../../core/error_and_success/succeses.dart';
+
+class EditUser implements UseCase<Success, Params>{
   final UserRepository repository;
 
   EditUser(this.repository);
 
   @override
-  Future<Either<Failure, UserEntity>?> call(Params params) async {
+  Future<Either<Failure, Success>?> call(Params params) async {
     return await repository.editUser(params.userEntity);
   }
 

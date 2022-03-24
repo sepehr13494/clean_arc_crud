@@ -4,6 +4,7 @@ import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
 import 'package:mc_crud_test/core/error_and_success/failures.dart';
 import 'package:mc_crud_test/core/error_and_success/succeses.dart';
 import 'package:mc_crud_test/features/crud/data/data_sources/user_local_data_source.dart';
+import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
 import 'package:mc_crud_test/features/crud/data/repositories/user_repository_impl.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mockito/annotations.dart';
@@ -15,7 +16,7 @@ import 'user_repository_impl_test.mocks.dart';
 void main() {
   late MockUserLocalDataSource mockUserLocalDataSource;
   late UserRepositoryImpl repositoryImpl;
-  final tUser = UserEntity(
+  final tUser = UserModel(
     id: 1,
     firstname: "firstname",
     lastname: "lastname",
@@ -24,6 +25,7 @@ void main() {
     email: "test@gmail.com",
     bankAccountNumber: "12356421356541",
   );
+  const tSuccess = MySuccess(message: 'test success');
   String tMessage = "test message";
 
   setUp(() {
@@ -33,16 +35,17 @@ void main() {
   });
 
   group('create user', () {
+    const int tId = 1;
     test(
       'should return UserModel when create user is successful',
       () async {
         //arrange
-        when(mockUserLocalDataSource.createUser(any)).thenAnswer((realInvocation) async => tUser);
+        when(mockUserLocalDataSource.createUser(any)).thenAnswer((realInvocation) async => tId);
         //act
         final result = await repositoryImpl.createUser(tUser);
         //assert
         verify(mockUserLocalDataSource.createUser(tUser));
-        expect(result, equals(Right(tUser)));
+        expect(result, equals(const Right(tId)));
       },
     );
 
@@ -61,7 +64,6 @@ void main() {
   });
 
   group('delete user', () {
-    const tSuccess = MySuccess(message: 'test success');
     test(
       'should return Success when delete user is successful',
           () async {
@@ -94,12 +96,12 @@ void main() {
       'should return UserModel when edit user is successful',
           () async {
         //arrange
-        when(mockUserLocalDataSource.editUser(any)).thenAnswer((realInvocation) async => tUser);
+        when(mockUserLocalDataSource.editUser(any)).thenAnswer((realInvocation) async => tSuccess);
         //act
         final result = await repositoryImpl.editUser(tUser);
         //assert
         verify(mockUserLocalDataSource.editUser(tUser));
-        expect(result, equals(Right(tUser)));
+        expect(result, equals(const Right(tSuccess)));
       },
     );
 
@@ -118,7 +120,7 @@ void main() {
   });
 
   group('get users', () {
-    List<UserEntity> tUsersList = [tUser];
+    List<UserModel> tUsersList = [tUser];
     test(
       'should return UserModel list when get users is successful',
           () async {

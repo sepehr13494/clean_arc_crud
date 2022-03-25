@@ -7,6 +7,10 @@ import '../../../../core/error_and_success/succeses.dart';
 import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
 
+const String USER_EDITED = "user edited";
+const String USER_DELETED = "user deleted";
+const String USER_CREATED = "User Created SuccessFully!";
+
 abstract class UserLocalDataSource{
   Future<int>? createUser(UserModel user);
   Future<Success>? deleteUser(UserModel user);
@@ -33,7 +37,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource{
   Future<Success>? deleteUser(UserEntity user) async {
     try{
       await box.delete(user.id);
-      return const MySuccess(message: "deleted");
+      return const MySuccess(message: USER_DELETED);
     } catch (e){
       throw CacheException(message: "from me : " + e.toString());
     }
@@ -43,7 +47,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource{
   Future<Success>? editUser(UserEntity user) async {
     try{
       await box.put(user.id,user);
-      return const MySuccess(message: "edited");
+      return const MySuccess(message: USER_EDITED);
     } catch (e){
       throw CacheException(message: e.toString());
     }

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mc_crud_test/core/util/input_validator.dart';
+import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

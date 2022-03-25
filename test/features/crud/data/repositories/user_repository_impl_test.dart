@@ -6,7 +6,6 @@ import 'package:mc_crud_test/core/error_and_success/succeses.dart';
 import 'package:mc_crud_test/features/crud/data/data_sources/user_local_data_source.dart';
 import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
 import 'package:mc_crud_test/features/crud/data/repositories/user_repository_impl.dart';
-import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

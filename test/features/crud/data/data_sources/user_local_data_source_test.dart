@@ -16,7 +16,6 @@ void main() {
 
   final tUser = UserModel.userModelForTest;
   const String tMessage = "test message";
-  final tSuccess = MySuccess(message: "test success");
 
   setUp(() {
     mockBox = MockBox();

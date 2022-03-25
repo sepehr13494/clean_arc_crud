@@ -43,6 +43,9 @@ dependencies:
   shared_preferences: ^2.0.13
   # Local database
   hive: ^2.1.0
+  #phone_number validator
+  libphonenumber: ^2.0.2
+  email_validator: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

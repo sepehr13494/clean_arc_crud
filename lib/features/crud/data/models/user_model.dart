@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));

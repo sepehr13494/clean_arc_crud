@@ -123,8 +123,7 @@ void main() {
       'should return CacheException when get users with hive is not successful',
       () async {
         //arrange
-        when(mockBox.toMap().values.toList())
-            .thenThrow(CacheException(message: tMessage));
+        when(mockBox.toMap()).thenThrow(CacheException(message: tMessage));
         //act
         final call = dataSourceImpl.getUsers;
         //assert

@@ -78,4 +78,18 @@ void main() {
       },
     );
   });
+
+  group('validateBankAccount', () {
+    const tBankAccount = "tBankAccount";
+
+    test(
+      'should return true always',
+          () async {
+        //act
+        final result = await inputValidator.validateBankAccount(bankAccount: tBankAccount);
+        //assert
+        expect(result, true);
+      },
+    );
+  });
 }

@@ -6,10 +6,10 @@ import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 
 import '../../../../core/error_and_success/succeses.dart';
 
-class EditUser implements UseCase<Success, Params>{
+class EditUserUseCase implements UseCase<Success, Params>{
   final UserRepository repository;
 
-  EditUser(this.repository);
+  EditUserUseCase(this.repository);
 
   @override
   Future<Either<Failure, Success>?> call(Params params) async {

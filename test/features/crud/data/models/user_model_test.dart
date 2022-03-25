@@ -7,15 +7,7 @@ import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tUserModel = UserModel(
-    id: 1,
-    firstname: "firstname",
-    lastname: "lastname",
-    dateOfBirth: DateTime.parse("2022-10-12"),
-    phoneNumber: "08132168546",
-    email: "email@gmail.com",
-    bankAccountNumber: "21654321654321",
-  );
+  final tUserModel = UserModel.userModelForTest;
 
   test(
     'should be a subclass of userEntity entity',
@@ -46,15 +38,7 @@ void main() {
             //act
           final result = tUserModel.toJson();
             //assert
-          final expectedMap = {
-            "id": 1,
-            "Firstname": "firstname",
-            "Lastname": "lastname",
-            "DateOfBirth": "2022-10-12",
-            "PhoneNumber": "08132168546",
-            "Email": "email@gmail.com",
-            "BankAccountNumber": "21654321654321"
-          };
+          final expectedMap = json.decode(fixture("user_model.json"));
           expect(result, expectedMap);
 
         },

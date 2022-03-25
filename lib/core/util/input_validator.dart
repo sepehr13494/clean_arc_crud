@@ -5,6 +5,7 @@ import 'package:mc_crud_test/core/error_and_success/failures.dart';
 abstract class InputValidator{
   Future<bool> validatePhoneNumber({required String phoneNumber,required String isoCode});
   Future<bool> validateEmail({required String email});
+  Future<bool> validateBankAccount({required String bankAccount});
 }
 
 class InputValidatorImpl implements InputValidator{
@@ -23,6 +24,12 @@ class InputValidatorImpl implements InputValidator{
   Future<bool> validateEmail({required String email}) async{
     return emailManager.checkValidation(email: email);
   }
+
+  @override
+  Future<bool> validateBankAccount({required String bankAccount}) async{
+    return true;
+  }
+
 }
 
 class PhoneNumberManager{

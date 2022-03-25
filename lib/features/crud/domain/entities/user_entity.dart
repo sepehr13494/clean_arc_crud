@@ -8,17 +8,18 @@ import 'package:hive/hive.dart';
 @HiveType(typeId: 0)
 class UserEntity extends Equatable {
   const UserEntity({
-    required this.id,
+    this.id,
     required this.firstname,
     required this.lastname,
     required this.dateOfBirth,
     required this.phoneNumber,
     required this.email,
     required this.bankAccountNumber,
+    required this.isoCode,
   });
 
   @HiveField(0)
-  final int id;
+  final int? id;
   @HiveField(1)
   final String firstname;
   @HiveField(2)
@@ -31,6 +32,8 @@ class UserEntity extends Equatable {
   final String email;
   @HiveField(6)
   final String bankAccountNumber;
+  @HiveField(7)
+  final String isoCode;
 
   @override
   List<Object?> get props => [
@@ -41,6 +44,9 @@ class UserEntity extends Equatable {
     phoneNumber,
     email,
     bankAccountNumber,
+    isoCode
   ];
+
+
 
 }

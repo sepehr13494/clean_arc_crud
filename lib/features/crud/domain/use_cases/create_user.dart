@@ -6,10 +6,10 @@ import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart';
 
 
-class CreateUser implements UseCase<int, Params>{
+class CreateUserUseCase implements UseCase<int, Params>{
   final UserRepository repository;
 
-  CreateUser(this.repository);
+  CreateUserUseCase(this.repository);
 
   @override
   Future<Either<Failure, int>?> call(Params params) async {

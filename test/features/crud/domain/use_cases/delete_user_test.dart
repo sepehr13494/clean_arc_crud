@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mc_crud_test/core/error_and_success/succeses.dart';
+import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/delete_user.dart';
@@ -14,24 +15,16 @@ import '../repositories/user_repository_test.mocks.dart';
 
 
 void main() {
-  late DeleteUser useCase;
+  late DeleteUserUseCase useCase;
   late MockUserRepository mockUserRepository;
   setUp(() {
     mockUserRepository = MockUserRepository();
-    useCase = DeleteUser(mockUserRepository);
+    useCase = DeleteUserUseCase(mockUserRepository);
   });
 
   Success tSuccess = const MySuccess(message: 'success');
 
-  final tUser = UserEntity(
-    id: 1,
-    firstname: "firstname",
-    lastname: "lastname",
-    dateOfBirth: DateTime.now(),
-    phoneNumber: "09373555973",
-    email: "test@gmail.com",
-    bankAccountNumber: "12356421356541",
-  );
+  final tUser = UserModel.userModelForTest;
 
   test(
     'should pass the user to the user repository and get success from there',

@@ -15,15 +15,7 @@ import 'user_repository_impl_test.mocks.dart';
 void main() {
   late MockUserLocalDataSource mockUserLocalDataSource;
   late UserRepositoryImpl repositoryImpl;
-  final tUser = UserModel(
-    id: 1,
-    firstname: "firstname",
-    lastname: "lastname",
-    dateOfBirth: DateTime.now(),
-    phoneNumber: "09373555973",
-    email: "test@gmail.com",
-    bankAccountNumber: "12356421356541",
-  );
+  final tUser = UserModel.userModelForTest;
   const tSuccess = MySuccess(message: 'test success');
   String tMessage = "test message";
 

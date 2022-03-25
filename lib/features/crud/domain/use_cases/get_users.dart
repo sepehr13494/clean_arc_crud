@@ -5,11 +5,11 @@ import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 
 import '../repositories/user_repository.dart';
 
-class GetUsers implements UseCase<List<UserEntity>,NoParams>{
+class GetUsersUseCase implements UseCase<List<UserEntity>,NoParams>{
 
   final UserRepository repository;
 
-  GetUsers(this.repository);
+  GetUsersUseCase(this.repository);
 
   @override
   Future<Either<Failure, List<UserEntity>>?> call(NoParams params) async{

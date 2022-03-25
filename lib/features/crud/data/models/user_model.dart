@@ -9,12 +9,13 @@ String userModelToJson(UserModel data) => json.encode(data.toJson());
 class UserModel extends UserEntity {
 
   const UserModel(
-      {required int id,
+      {int? id,
       required String firstname,
       required String lastname,
       required DateTime dateOfBirth,
       required String phoneNumber,
       required String email,
+      required String isoCode,
       required String bankAccountNumber})
       : super(
           id: id,
@@ -24,6 +25,7 @@ class UserModel extends UserEntity {
           phoneNumber: phoneNumber,
           email: email,
           bankAccountNumber: bankAccountNumber,
+    isoCode: isoCode,
         );
 
   factory UserModel.fromEntity(UserEntity userEntity) => UserModel(
@@ -34,6 +36,7 @@ class UserModel extends UserEntity {
         phoneNumber: userEntity.phoneNumber,
         email: userEntity.email,
         bankAccountNumber: userEntity.bankAccountNumber,
+    isoCode: userEntity.isoCode,
       );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -44,6 +47,7 @@ class UserModel extends UserEntity {
         phoneNumber: json["PhoneNumber"],
         email: json["Email"],
         bankAccountNumber: json["BankAccountNumber"],
+        isoCode: json["isoCode"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,6 +59,7 @@ class UserModel extends UserEntity {
         "PhoneNumber": phoneNumber,
         "Email": email,
         "BankAccountNumber": bankAccountNumber,
+        "isoCode": isoCode,
       };
 
   static final UserModel userModelForTest = UserModel(
@@ -65,5 +70,6 @@ class UserModel extends UserEntity {
     phoneNumber: "09373555973",
     email: "test@gmail.com",
     bankAccountNumber: "12356421356541",
+    isoCode: "IR",
   );
 }

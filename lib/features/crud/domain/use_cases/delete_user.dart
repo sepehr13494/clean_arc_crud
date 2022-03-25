@@ -5,10 +5,10 @@ import 'package:mc_crud_test/core/usecases/usercase.dart';
 import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 
-class DeleteUser implements UseCase<Success, Params>{
+class DeleteUserUseCase implements UseCase<Success, Params>{
   final UserRepository repository;
 
-  DeleteUser(this.repository);
+  DeleteUserUseCase(this.repository);
 
   @override
   Future<Either<Failure, Success>?> call(Params params) async {

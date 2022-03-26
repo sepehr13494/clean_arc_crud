@@ -5,6 +5,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
+part 'user_entity.g.dart';
+
 @HiveType(typeId: 0)
 class UserEntity extends Equatable {
   const UserEntity({

@@ -23,18 +23,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final EditUserUseCase editUser;
   final DeleteUserUseCase deleteUser;
   final GetUsersUseCase getUsers;
-  final InputValidatorImpl inputValidatorImpl;
+  final InputValidator inputValidator;
 
   UserBloc({
     required this.createUser,
     required this.editUser,
     required this.deleteUser,
     required this.getUsers,
-    required this.inputValidatorImpl,
+    required this.inputValidator,
   }) : super(UserInitial()) {
     on<CreateUserEvent>((event, emit) async {
       try{
-        await inputValidatorImpl.validateUserModel(event.userModel);
+        await inputValidator.validateUserModel(event.userModel);
         emit(UsersLoading());
         final successOrError = await createUser(Params(userEntity: event.userModel));
         successOrError!.fold((Failure failure) {
@@ -48,7 +48,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
     on<EditUserEvent>((event, emit) async {
       try{
-        await inputValidatorImpl.validateUserModel(event.userModel);
+        await inputValidator.validateUserModel(event.userModel);
         emit(UsersLoading());
         final successOrError = await editUser(Params(userEntity: event.userModel));
         successOrError!.fold((Failure failure) {

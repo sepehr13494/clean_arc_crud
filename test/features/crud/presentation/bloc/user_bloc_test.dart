@@ -46,7 +46,7 @@ void main() {
       editUser: mockEditUserUseCase,
       deleteUser: mockDeleteUserUseCase,
       getUsers: mockGetUsersUseCase,
-      inputValidatorImpl: mockInputValidatorImpl,
+      inputValidator: mockInputValidatorImpl,
     );
   });
 

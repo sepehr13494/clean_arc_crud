@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
+import 'package:mc_crud_test/injection_container.dart' as di;
 
-void main() {
+void main() async{
+  await Hive.initFlutter();
+  Hive.registerAdapter(UserEntityAdapter());
+  await di.init();
   runApp(const MyApp());
 }
 

@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^2.0.13
   # Local database
   hive: ^2.1.0
+  hive_flutter: ^1.1.0
   #phone_number validator
   libphonenumber: ^2.0.2
   email_validator: ^2.0.1
@@ -56,6 +57,7 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.1.0
   build_runner: ^2.1.8
+  hive_generator: ^1.1.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

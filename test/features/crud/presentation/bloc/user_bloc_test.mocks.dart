@@ -9,7 +9,6 @@ import 'package:mc_crud_test/core/error_and_success/failures.dart' as _i7;
 import 'package:mc_crud_test/core/error_and_success/succeses.dart' as _i9;
 import 'package:mc_crud_test/core/usecases/usercase.dart' as _i13;
 import 'package:mc_crud_test/core/util/input_validator.dart' as _i3;
-import 'package:mc_crud_test/features/crud/data/models/user_model.dart' as _i14;
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart'
     as _i12;
 import 'package:mc_crud_test/features/crud/domain/repositories/user_repository.dart'
@@ -22,6 +21,8 @@ import 'package:mc_crud_test/features/crud/domain/use_cases/edit_user.dart'
     as _i8;
 import 'package:mc_crud_test/features/crud/domain/use_cases/get_users.dart'
     as _i11;
+import 'package:mc_crud_test/features/crud/presentation/models/create_user_obj.dart'
+    as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -156,7 +157,7 @@ class MockInputValidatorImpl extends _i1.Mock
               #validateBankAccount, [], {#bankAccount: bankAccount}),
           returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
   @override
-  _i5.Future<void> validateUserModel(_i14.UserModel? userModel) =>
+  _i5.Future<void> validateUserModel(_i14.CreateUserObj? userModel) =>
       (super.noSuchMethod(Invocation.method(#validateUserModel, [userModel]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);

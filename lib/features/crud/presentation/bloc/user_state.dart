@@ -27,6 +27,15 @@ class UserError extends UserState{
   const UserError({required this.message,this.reload});
 }
 
+class WaitForResponse extends UserState{}
+
+class ResponseError extends UserState{
+  final String message;
+
+  const ResponseError({required this.message});
+
+}
+
 abstract class SuccessfullyDoneState extends UserState{
   final String message;
 

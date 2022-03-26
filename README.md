@@ -52,3 +52,7 @@ Please clone this repository in a new github repository in private mode and shar
 ### for generate test class
 
 flutter pub run build_runner watch
+
+### for generate hive class
+
+flutter packages pub run build_runner build

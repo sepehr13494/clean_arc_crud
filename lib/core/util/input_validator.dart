@@ -3,12 +3,13 @@ import 'package:libphonenumber/libphonenumber.dart';
 import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
 import 'package:mc_crud_test/core/error_and_success/failures.dart';
 import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
+import 'package:mc_crud_test/features/crud/presentation/models/create_user_obj.dart';
 
 abstract class InputValidator{
   Future<bool> validatePhoneNumber({required String phoneNumber,required String isoCode});
   Future<bool> validateEmail({required String email});
   Future<bool> validateBankAccount({required String bankAccount});
-  Future<void> validateUserModel(UserModel userModel);
+  Future<void> validateUserModel(CreateUserObj userModel);
 }
 
 class InputValidatorImpl implements InputValidator{
@@ -34,26 +35,27 @@ class InputValidatorImpl implements InputValidator{
   }
 
   @override
-  Future<void> validateUserModel(UserModel userModel) async{
+  Future<void> validateUserModel(CreateUserObj userModel) async{
     Map<String, dynamic> json = userModel.toJson();
+    print(json);
     json.forEach((key, value) {
       if(key != "id"){
         if(value == null || value.toString().trim().isEmpty){
-          throw InputValidationException(message: "Please fill all fields");
+          throw InputValidationException(message: "Please fill all fields : $key");
         }
       }
     });
-    bool phoneValid = await validatePhoneNumber(phoneNumber: userModel.phoneNumber, isoCode: userModel.isoCode);
+    bool phoneValid = await validatePhoneNumber(phoneNumber: userModel.phoneNumber!, isoCode: userModel.isoCode!);
     if(!phoneValid){
       throw InputValidationException(message: "Invalid Phone Number");
     }
-    bool emailValid = await validateEmail(email: userModel.email);
-    if(emailValid){
+    bool emailValid = await validateEmail(email: userModel.email!);
+    if(!emailValid){
       throw InputValidationException(message: "Invalid email");
     }
 
-    bool bankAccountValid = await validateBankAccount(bankAccount: userModel.bankAccountNumber);
-    if(bankAccountValid){
+    bool bankAccountValid = await validateBankAccount(bankAccount: userModel.bankAccountNumber!);
+    if(!bankAccountValid){
       throw InputValidationException(message: "Invalid bank account");
     }
   }

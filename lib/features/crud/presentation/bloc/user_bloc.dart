@@ -8,6 +8,7 @@ import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/delete_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/edit_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/get_users.dart';
+import 'package:mc_crud_test/features/crud/presentation/models/create_user_obj.dart';
 
 import '../../../../core/usecases/usercase.dart';
 import '../../data/data_sources/user_local_data_source.dart';
@@ -31,40 +32,44 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     required this.getUsers,
     required this.inputValidator,
   }) : super(UserInitial()) {
-
     on<CreateUserEvent>((event, emit) async {
       try{
+        emit(WaitForResponse());
         await inputValidator.validateUserModel(event.userModel);
-        emit(UsersLoading());
-        final successOrError = await createUser(Params(userEntity: event.userModel));
+        final successOrError = await createUser(Params(userEntity: UserEntity.fromCreateUserObj(event.userModel)));
         successOrError!.fold((Failure failure) {
-          emit(UserError(message: failure.message));
+          print(failure.message);
+          emit(ResponseError(message: failure.message));
         }, (success) {
           emit(const UserCreated(message: USER_CREATED));
         });
       } on InputValidationException catch (e){
-        emit(UserError(message: e.message));
+        print(e.message);
+        emit(ResponseError(message: e.message));
       }
     });
     on<EditUserEvent>((event, emit) async {
       try{
+        emit(WaitForResponse());
         await inputValidator.validateUserModel(event.userModel);
-        emit(UsersLoading());
-        final successOrError = await editUser(Params(userEntity: event.userModel));
+        final successOrError = await editUser(Params(userEntity: UserEntity.fromCreateUserObj(event.userModel)));
         successOrError!.fold((Failure failure) {
-          emit(UserError(message: failure.message));
+          print(failure.message);
+          emit(ResponseError(message: failure.message));
         }, (success) {
           emit(UserEdited(message: success.message));
         });
       } on InputValidationException catch (e){
-        emit(UserError(message: e.message));
+        print(e.message);
+        emit(ResponseError(message: e.message));
       }
     });
     on<DeleteUserEvent>((event, emit) async {
-      emit(UsersLoading());
+      emit(WaitForResponse());
       final successOrError = await deleteUser(Params(userEntity: event.userModel));
       successOrError!.fold((Failure failure) {
-        emit(UserError(message: failure.message));
+        print(failure.message);
+        emit(ResponseError(message: failure.message));
       }, (success) {
         emit(UserDeleted(message: success.message));
       });
@@ -73,6 +78,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UsersLoading());
       final usersOrError = await getUsers(NoParams());
       usersOrError!.fold((Failure failure) {
+        print(failure.message);
         emit(UserError(message: failure.message));
       }, (users) {
         emit(UsersLoaded(users: users));

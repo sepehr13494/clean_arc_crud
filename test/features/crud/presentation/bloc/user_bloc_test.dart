@@ -11,6 +11,7 @@ import 'package:mc_crud_test/features/crud/domain/use_cases/delete_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/edit_user.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/get_users.dart';
 import 'package:mc_crud_test/features/crud/presentation/bloc/user_bloc.dart';
+import 'package:mc_crud_test/features/crud/presentation/models/create_user_obj.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -31,6 +32,7 @@ void main() {
   late UserBloc userBloc;
 
   final tUser = UserModel.userModelForTest;
+  final tCreateUser = CreateUserObj.createUserObjForTest;
   const tMessage = "message";
 
 
@@ -59,7 +61,7 @@ void main() {
     //arrange
     when(mockInputValidatorImpl.validateUserModel(any)).thenThrow(InputValidationException(message: tMessage));
     //assert later
-    final expected = [const UserError(message: tMessage)];
+    final expected = [WaitForResponse(),const ResponseError(message: tMessage)];
     expectLater(userBloc.stream, emitsInOrder(expected));
   }
 
@@ -72,7 +74,7 @@ void main() {
       () async {
         when(mockCreateUserUseCase(any)).thenAnswer((realInvocation) async => const Right(tInt));
         //act
-        userBloc.add(CreateUserEvent(userModel: tUser));
+        userBloc.add(CreateUserEvent(userModel: tCreateUser));
         await untilCalled(mockInputValidatorImpl.validateUserModel(any));
         //assert
         verify(mockInputValidatorImpl.validateUserModel(any));
@@ -85,7 +87,7 @@ void main() {
         () async{
           throwExceptionFromValidator();
             //act
-            userBloc.add(CreateUserEvent(userModel: tUser));
+            userBloc.add(CreateUserEvent(userModel: tCreateUser));
         },
     );
 
@@ -95,10 +97,10 @@ void main() {
         //arrange
         when(mockCreateUserUseCase(any)).thenAnswer((_) async => const Right(tInt));
         //assert later
-        final expected = [UsersLoading(),const UserCreated(message: USER_CREATED)];
+        final expected = [WaitForResponse(),const UserCreated(message: USER_CREATED)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
-        userBloc.add(CreateUserEvent(userModel: tUser));
+        userBloc.add(CreateUserEvent(userModel: tCreateUser));
       },
     );
 
@@ -108,10 +110,10 @@ void main() {
         //arrange
         when(mockCreateUserUseCase(any)).thenAnswer((_) async => const Left(CacheFailure(message: tMessage)));
         //assert later
-        final expected = [UsersLoading(),const UserError(message: tMessage)];
+        final expected = [WaitForResponse(),const ResponseError(message: tMessage)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
-        userBloc.add(CreateUserEvent(userModel: tUser));
+        userBloc.add(CreateUserEvent(userModel: tCreateUser));
       },
     );
   });
@@ -123,7 +125,7 @@ void main() {
           () async {
         when(mockEditUserUseCase(any)).thenAnswer((realInvocation) async => const Right(MySuccess(message: tMessage)));
         //act
-        userBloc.add(EditUserEvent(userModel: tUser));
+        userBloc.add(EditUserEvent(userModel: tCreateUser));
         await untilCalled(mockInputValidatorImpl.validateUserModel(any));
         //assert
         verify(mockInputValidatorImpl.validateUserModel(any));
@@ -136,7 +138,7 @@ void main() {
           () async{
         throwExceptionFromValidator();
         //act
-        userBloc.add(EditUserEvent(userModel: tUser));
+        userBloc.add(EditUserEvent(userModel: tCreateUser));
       },
     );
 
@@ -146,10 +148,10 @@ void main() {
         //arrange
         when(mockEditUserUseCase(any)).thenAnswer((_) async => const Right(MySuccess(message: tMessage)));
         //assert later
-        final expected = [UsersLoading(),const UserEdited(message: tMessage)];
+        final expected = [WaitForResponse(),const UserEdited(message: tMessage)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
-        userBloc.add(EditUserEvent(userModel: tUser));
+        userBloc.add(EditUserEvent(userModel: tCreateUser));
       },
     );
 
@@ -159,10 +161,10 @@ void main() {
         //arrange
         when(mockEditUserUseCase(any)).thenAnswer((_) async => const Left(CacheFailure(message: tMessage)));
         //assert later
-        final expected = [UsersLoading(),const UserError(message: tMessage)];
+        final expected = [WaitForResponse(),const ResponseError(message: tMessage)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
-        userBloc.add(EditUserEvent(userModel: tUser));
+        userBloc.add(EditUserEvent(userModel: tCreateUser));
       },
     );
   });
@@ -175,7 +177,7 @@ void main() {
         //arrange
         when(mockDeleteUserUseCase(any)).thenAnswer((_) async => const Right(MySuccess(message: tMessage)));
         //assert later
-        final expected = [UsersLoading(),const UserDeleted(message: tMessage)];
+        final expected = [WaitForResponse(),const UserDeleted(message: tMessage)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
         userBloc.add(DeleteUserEvent(userModel: tUser));
@@ -188,7 +190,7 @@ void main() {
         //arrange
         when(mockDeleteUserUseCase(any)).thenAnswer((_) async => const Left(CacheFailure(message: tMessage)));
         //assert later
-        final expected = [UsersLoading(),const UserError(message: tMessage)];
+        final expected = [WaitForResponse(),const ResponseError(message: tMessage)];
         expectLater(userBloc.stream, emitsInOrder(expected));
         //act
         userBloc.add(DeleteUserEvent(userModel: tUser));

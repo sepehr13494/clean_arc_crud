@@ -4,10 +4,9 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:mc_crud_test/features/crud/presentation/models/create_user_obj.dart';
 
-part 'user_entity.g.dart';
 
-@HiveType(typeId: 0)
 class UserEntity extends Equatable {
   const UserEntity({
     this.id,
@@ -36,6 +35,17 @@ class UserEntity extends Equatable {
   final String bankAccountNumber;
   @HiveField(7)
   final String isoCode;
+
+  factory UserEntity.fromCreateUserObj(CreateUserObj createUserObj) => UserEntity(
+    id: createUserObj.id,
+    firstname: createUserObj.firstname!,
+    lastname: createUserObj.lastname!,
+    dateOfBirth: DateTime.parse(createUserObj.dateOfBirth!),
+    phoneNumber: createUserObj.phoneNumber!,
+    email: createUserObj.email!,
+    bankAccountNumber: createUserObj.bankAccountNumber!,
+    isoCode: createUserObj.isoCode!,
+  );
 
   @override
   List<Object?> get props => [

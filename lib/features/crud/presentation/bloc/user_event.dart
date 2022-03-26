@@ -8,13 +8,13 @@ abstract class UserEvent extends Equatable {
 }
 
 class CreateUserEvent extends UserEvent{
-  final UserModel userModel;
+  final CreateUserObj userModel;
 
   const CreateUserEvent({required this.userModel});
 }
 
 class EditUserEvent extends UserEvent{
-  final UserModel userModel;
+  final CreateUserObj userModel;
 
   const EditUserEvent({required this.userModel});
 }
@@ -22,7 +22,7 @@ class EditUserEvent extends UserEvent{
 class UserEditedEvent extends UserEvent{}
 
 class DeleteUserEvent extends UserEvent{
-  final UserModel userModel;
+  final UserEntity userModel;
 
   const DeleteUserEvent({required this.userModel});
 }

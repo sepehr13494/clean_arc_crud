@@ -1,23 +1,34 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
+
+part 'user_model.g.dart';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
 String userModelToJson(UserModel data) => json.encode(data.toJson());
 
+@HiveType(typeId: 1)
 class UserModel extends UserEntity {
-
-  const UserModel(
-      {int? id,
-      required String firstname,
-      required String lastname,
-      required DateTime dateOfBirth,
-      required String phoneNumber,
-      required String email,
-      required String isoCode,
-      required String bankAccountNumber})
-      : super(
+  const UserModel({
+    @HiveField(0)
+    int? id,
+    @HiveField(1)
+    required String firstname,
+    @HiveField(2)
+    required String lastname,
+    @HiveField(3)
+    required DateTime dateOfBirth,
+    @HiveField(4)
+    required String phoneNumber,
+    @HiveField(5)
+    required String email,
+    @HiveField(6)
+    required String isoCode,
+    @HiveField(7)
+    required String bankAccountNumber,
+  }) : super(
           id: id,
           firstname: firstname,
           lastname: lastname,
@@ -25,7 +36,7 @@ class UserModel extends UserEntity {
           phoneNumber: phoneNumber,
           email: email,
           bankAccountNumber: bankAccountNumber,
-    isoCode: isoCode,
+          isoCode: isoCode,
         );
 
   factory UserModel.fromEntity(UserEntity userEntity) => UserModel(
@@ -36,7 +47,7 @@ class UserModel extends UserEntity {
         phoneNumber: userEntity.phoneNumber,
         email: userEntity.email,
         bankAccountNumber: userEntity.bankAccountNumber,
-    isoCode: userEntity.isoCode,
+        isoCode: userEntity.isoCode,
       );
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -72,4 +83,5 @@ class UserModel extends UserEntity {
     bankAccountNumber: "12356421356541",
     isoCode: "IR",
   );
+
 }

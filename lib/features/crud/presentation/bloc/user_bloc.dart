@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
 import 'package:mc_crud_test/core/error_and_success/failures.dart';
-import 'package:mc_crud_test/core/error_and_success/succeses.dart';
 import 'package:mc_crud_test/core/util/input_validator.dart';
 import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
@@ -32,6 +31,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     required this.getUsers,
     required this.inputValidator,
   }) : super(UserInitial()) {
+
     on<CreateUserEvent>((event, emit) async {
       try{
         await inputValidator.validateUserModel(event.userModel);

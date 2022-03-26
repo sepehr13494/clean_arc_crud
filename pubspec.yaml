@@ -46,6 +46,7 @@ dependencies:
   hive_flutter: ^1.1.0
   #phone_number validator
   libphonenumber: ^2.0.2
+  country_code_picker: ^2.0.2
   email_validator: ^2.0.1
 
   # The following adds the Cupertino Icons font to your application.

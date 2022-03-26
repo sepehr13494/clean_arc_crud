@@ -3,7 +3,6 @@ import 'package:libphonenumber/libphonenumber.dart';
 import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
 import 'package:mc_crud_test/core/error_and_success/failures.dart';
 import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
-import 'package:mc_crud_test/features/crud/domain/entities/user_entity.dart';
 
 abstract class InputValidator{
   Future<bool> validatePhoneNumber({required String phoneNumber,required String isoCode});

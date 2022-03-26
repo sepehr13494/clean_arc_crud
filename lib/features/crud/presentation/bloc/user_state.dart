@@ -22,8 +22,9 @@ class UsersLoaded extends UserState{
 
 class UserError extends UserState{
   final String message;
+  final Function? reload;
 
-  const UserError({required this.message});
+  const UserError({required this.message,this.reload});
 }
 
 abstract class SuccessfullyDoneState extends UserState{

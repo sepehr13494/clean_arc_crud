@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:hive/hive.dart';
 import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
+import 'package:mc_crud_test/features/crud/data/data_sources/input_data_validator.dart';
 
 import '../../../../core/error_and_success/succeses.dart';
 import '../../domain/entities/user_entity.dart';
@@ -23,12 +24,15 @@ abstract class UserLocalDataSource {
 
 class UserLocalDataSourceImpl implements UserLocalDataSource {
   final Box box;
+  final InputDataValidator inputDataValidator;
 
-  UserLocalDataSourceImpl({required this.box});
+  UserLocalDataSourceImpl({required this.inputDataValidator, required this.box});
 
   @override
-  Future<int>? createUser(UserEntity user) async {
+  Future<int>? createUser(UserEntity userEntity) async {
     try {
+      UserModel user = UserModel.fromEntity(userEntity);
+      await inputDataValidator.checkForExistingData(user);
       int id = await box.add(user);
       return id;
     } catch (e) {
@@ -47,9 +51,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   }
 
   @override
-  Future<Success>? editUser(UserEntity user) async {
+  Future<Success>? editUser(UserEntity userEntity) async {
+    UserModel user = UserModel.fromEntity(userEntity,);
     try {
-      print(user.id);
+      await inputDataValidator.checkForExistingData(user,isEdit: true);
       await box.put(user.id, user);
       return const MySuccess(message: USER_EDITED);
     } catch (e) {

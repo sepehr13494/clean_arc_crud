@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mc_crud_test/core/error_and_success/exeptions.dart';
 import 'package:mc_crud_test/core/error_and_success/succeses.dart';
+import 'package:mc_crud_test/features/crud/data/data_sources/input_data_validator.dart';
 import 'package:mc_crud_test/features/crud/data/data_sources/user_local_data_source.dart';
 import 'package:mc_crud_test/features/crud/data/models/user_model.dart';
 import 'package:mockito/annotations.dart';
@@ -10,16 +11,19 @@ import 'package:mockito/mockito.dart';
 import 'user_local_data_source_test.mocks.dart';
 
 @GenerateMocks([Box])
+@GenerateMocks([InputDataValidatorImpl])
 void main() {
   late UserLocalDataSourceImpl dataSourceImpl;
   late MockBox mockBox;
+  late MockInputDataValidatorImpl mockInputDataValidatorImpl;
 
   final tUser = UserModel.userModelForTest;
   const String tMessage = "test message";
 
   setUp(() {
     mockBox = MockBox();
-    dataSourceImpl = UserLocalDataSourceImpl(box: mockBox);
+    mockInputDataValidatorImpl = MockInputDataValidatorImpl();
+    dataSourceImpl = UserLocalDataSourceImpl(box: mockBox,inputDataValidator: mockInputDataValidatorImpl);
   });
 
   group('create user', () {
@@ -34,6 +38,18 @@ void main() {
         //assert
         verify(mockBox.add(tUser));
         expect(result, equals(tInt));
+      },
+    );
+
+    test(
+      'should return CacheException when InputDataValidator throws exception',
+          () async {
+        //arrange
+        when(mockInputDataValidatorImpl.checkForExistingData(any)).thenThrow(CacheException(message: tMessage));
+        //act
+        final call = dataSourceImpl.createUser;
+        //assert
+        expect(() => call(tUser), throwsA(const TypeMatcher<CacheException>()));
       },
     );
 
@@ -59,6 +75,18 @@ void main() {
         //assert
         verify(mockBox.put(tUser.id, tUser));
         expect(result, isA<MySuccess>());
+      },
+    );
+    
+    test(
+      'should return CacheException when InputDataValidator throws exception',
+          () async {
+        //arrange
+        when(mockInputDataValidatorImpl.checkForExistingData(any)).thenThrow(CacheException(message: tMessage));
+        //act
+        final call = dataSourceImpl.createUser;
+        //assert
+        expect(() => call(tUser), throwsA(const TypeMatcher<CacheException>()));
       },
     );
 

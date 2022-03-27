@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:mc_crud_test/core/util/input_validator.dart';
+import 'package:mc_crud_test/features/crud/data/data_sources/input_data_validator.dart';
 import 'package:mc_crud_test/features/crud/data/data_sources/user_local_data_source.dart';
 import 'package:mc_crud_test/features/crud/data/repositories/user_repository_impl.dart';
 import 'package:mc_crud_test/features/crud/domain/use_cases/create_user.dart';
@@ -41,7 +42,8 @@ void initFeatures() {
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(userLocalDataSource: sl()));
   
   //dataSource
-  sl.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl(box: sl()));
+  sl.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl(box: sl(),inputDataValidator: sl()));
+  sl.registerLazySingleton<InputDataValidator>(() => InputDataValidatorImpl(box: sl()));
 }
 
 void initCore() {

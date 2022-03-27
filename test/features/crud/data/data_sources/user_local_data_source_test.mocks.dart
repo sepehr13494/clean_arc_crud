@@ -5,6 +5,9 @@
 import 'dart:async' as _i3;
 
 import 'package:hive/hive.dart' as _i2;
+import 'package:mc_crud_test/features/crud/data/data_sources/input_data_validator.dart'
+    as _i4;
+import 'package:mc_crud_test/features/crud/data/models/user_model.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -16,6 +19,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
+
+class _FakeBox_0<E> extends _i1.Fake implements _i2.Box<E> {}
 
 /// A class which mocks [Box].
 ///
@@ -138,4 +143,26 @@ class MockBox<E> extends _i1.Mock implements _i2.Box<E> {
   _i3.Future<void> flush() => (super.noSuchMethod(Invocation.method(#flush, []),
       returnValue: Future<void>.value(),
       returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+}
+
+/// A class which mocks [InputDataValidatorImpl].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockInputDataValidatorImpl extends _i1.Mock
+    implements _i4.InputDataValidatorImpl {
+  MockInputDataValidatorImpl() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Box<dynamic> get box => (super.noSuchMethod(Invocation.getter(#box),
+      returnValue: _FakeBox_0<dynamic>()) as _i2.Box<dynamic>);
+  @override
+  _i3.Future<void> checkForExistingData(_i5.UserModel? userModel,
+          {bool? isEdit = false}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #checkForExistingData, [userModel], {#isEdit: isEdit}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
 }
